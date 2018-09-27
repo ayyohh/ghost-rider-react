@@ -33,7 +33,7 @@ class CarsContainer extends Component {
     }
     this.toggle = this.toggle.bind(this);
     this.toggle1 = this.toggle1.bind(this);
-    this.toggle2 = this.toggle2.bind(this);
+    this.toggle2 = this.toggle3.bind(this);
   }
   toggle() {
     this.setState({
@@ -84,10 +84,7 @@ class CarsContainer extends Component {
     try {
       const createdCar = await fetch('http://127.0.0.1:8000/api/cars/', {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: JSON.stringify(data)
       });
       const createdCarJson = await createdCar.json();
       this.setState({ cars: [...this.state.cars, createdCarJson] });
@@ -102,10 +99,7 @@ class CarsContainer extends Component {
     console.log('deleteCar function is being called, this is the id: ', id);
     try {
       const deleteCar = await fetch('http://127.0.0.1:8000/api/cars/' + id, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        method: 'DELETE'
       });
       console.log(deleteCar, 'this is delete car');
 
@@ -141,10 +135,7 @@ class CarsContainer extends Component {
     try {
       const editResponse = await fetch('http://127.0.0.1:8000/api/cars/' + this.state.editCarId, {
         method: 'PUT',
-        body: JSON.stringify(this.state.carToEdit),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: JSON.stringify(this.state.carToEdit)
       });
       const editResponseJson = await editResponse.json();
       console.log(editResponseJson);
@@ -192,10 +183,7 @@ class CarsContainer extends Component {
     try {
       const createdComment = await fetch('http://127.0.0.1:8000/api/comments/', {
         method: 'POST',
-        body: JSON.stringify(comment),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: JSON.stringify(comment)
       });
       const createdCommentJson = await createdComment.json();
       this.setState({ comments: [...this.state.comments, createdCommentJson] });
@@ -210,10 +198,7 @@ class CarsContainer extends Component {
     console.log('deleteComment function is being called, this is the id: ', id);
     try {
       const deleteComment = await fetch('http://127.0.0.1:8000/api/comments/' + id, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        method: 'DELETE'
       });
       console.log(deleteComment, 'this is delete car');
 
@@ -229,7 +214,6 @@ class CarsContainer extends Component {
 
   showCommentModal = (id, e) => {
     // i comes before e, when called with bind
-    this.toggle2();
     const commentToEdit = this.state.comments.find((comment) => comment.id === id)
     console.log(commentToEdit, ' commentToEdit')
     console.log(id);
@@ -247,10 +231,7 @@ class CarsContainer extends Component {
     try {
       const editResponse = await fetch('http://127.0.0.1:8000/api/comments/' + this.state.editCommentId, {
         method: 'PUT',
-        body: JSON.stringify(this.state.commentToEdit),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: JSON.stringify(this.state.commentToEdit)
       });
 
       const editResponseJson = await editResponse.json();
@@ -266,7 +247,6 @@ class CarsContainer extends Component {
         comment: editedCommentArray,
         showCommentEdit: false
       });
-      this.toggle2();
     } catch (err) {
       console.log(err);
     }

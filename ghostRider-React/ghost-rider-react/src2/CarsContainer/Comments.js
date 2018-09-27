@@ -5,7 +5,7 @@ import EditComment from './CRUDComments/EditComment';
 
 const Comments = (props) => {
 
-  let apiCarID = 'http://127.0.0.1:8000/api/cars/' + props.carID;
+  let apiCarID = 'http://127.0.0.1:8000/users/api/cars/' + props.carID;
 
   const commentList = props.comments.map((comment, i) => {
     // console.log(comment, ' comment id, this is why we needed the checkbox, will discuss')
@@ -20,22 +20,15 @@ const Comments = (props) => {
 
 
             <div className="addCarBTN">
-              <Button color="danger" onClick={props.showCommentModal.bind(null, comment.id)}>Edit Comment</Button>
-              <Modal isOpen={props.modal2} toggle2={props.toggle2}>
-                <ModalHeader className="modal-header" toggle2={props.toggle2}>Edit Your Comment Below:</ModalHeader>
+              <Button color="danger" onClick={props.showCommentModal.bind(null, comment.id)}>Edit Car</Button>
+              <Modal isOpen={props.modal2} toggle1={props.toggle1}>
+                <ModalHeader className="modal-header" toggle1={props.toggle2}>Edit Your Car Below:</ModalHeader>
                 <ModalBody>
 
-                  <EditComment closeAndEditComment={props.closeAndEditComment}
-                    handleCommentFormChange={props.handleCommentFormChange}
-                    commentToEdit={props.commentToEdit}
-                  />
-
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="secondary" onClick={props.toggle2}>Cancel</Button>
-                </ModalFooter>
-              </Modal>
-            </div>
+                <EditComment closeAndEditComment={props.closeAndEditComment}
+                             handleCommentFormChange={props.handleCommentFormChange}
+                             commentToEdit={props.state.commentToEdit}
+                />
 
 
 
